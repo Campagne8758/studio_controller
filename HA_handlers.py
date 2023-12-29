@@ -11,6 +11,19 @@ light_off_call = "http://192.168.0.23:8123/api/services/light/turn_off"
 radio_start = "http://192.168.0.23:8123/api/services/media_player/play_media"
 radio_stop = "http://192.168.0.23:8123/api/services/media_player/media_stop"
 
+#==========LIGHT FUNCTIONS ===================
+
+def scene_api(entity):
+    ha_url = scene_call
+    headers = {
+      "Authorization": token,
+      "content-type": 'application/json',
+      }
+    payload = entity
+    response = urequests.post(ha_url, headers=headers, data=payload)
+    response.close()
+
+#=============================================
 
 #==========RADIO FUNCTIONS ===================
 #Function to start a radio based on the data payload passed to it by the call
@@ -51,14 +64,7 @@ def key_do(key_number, page_n, token):
         #Key 5 page 0: cozy studio
         if key_number == 16:
             #print("You pressed button 5")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_cozy"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_cozy"}')
         #Key 6 page 0: Warm Bright
         elif key_number == 32:
             #print("You pressed button 6")
