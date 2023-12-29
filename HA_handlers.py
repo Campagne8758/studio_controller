@@ -140,23 +140,18 @@ def key_do(key_number, page_n, token):
     if page_n == 1: #Additional lights control for the Studio
         #Key 5 page 0: n5md
         if key_number == 16:
-            #print("You pressed button 5")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/n5md130.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 6 page 1: SanFran 
         elif key_number == 32:
-            #print("You pressed button 6")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/sf1033130.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 7 page 1: Drone
         elif key_number == 64:
-            #print("You pressed button 7")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/dronezone130.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 8 page 1: DarkZone 
         elif key_number == 128:
-            #print("You pressed button 7bis")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/darkzone130.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 8 page 1: 6forty
         elif key_number == 256:
-            #print("You pressed button 8")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://radio.6forty.com:8000/6forty.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 9 page 1: BBC 3
         elif key_number == 512:
@@ -166,14 +161,12 @@ def key_do(key_number, page_n, token):
             print("You pressed button 10")
         #Key 11 page 1: KEXP
         elif key_number == 2048:
-            #print("You pressed button 11")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://kexp.streamguys1.com/kexp160.aac", "media_content_type": "audio/mp4"}', token=token)
         #Key 12 page 1: TBC
         elif key_number == 4096:
             print("You pressed button 12")            
         #Key 13 page 1: Stop Radio
         elif key_number == 8192:
-            #print("You pressed button 13")
             ha_url = radio_stop
             headers = {
               "Authorization": token,
@@ -184,11 +177,9 @@ def key_do(key_number, page_n, token):
             response.close()
         #Key 14 page 0: Volume UP - TO DO
         elif key_number == 16384:
-            #print("You pressed button 14")
             volume_up(token=token)
         #Key 15 page 0: Volume Down - TO DO
         elif key_number == 32768:
-            #print("You pressed button 15")
             volume_down(token=token)
     if page_n == 2: #Possibly move the radio controls to this page
         print("see you later")
