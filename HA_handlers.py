@@ -137,7 +137,7 @@ def key_do(key_number, page_n, token):
             #print("You pressed button 15")
             volume_down(token=token)
             
-    if page_n == 1:
+    if page_n == 1: #Additional lights control for the Studio
         #Key 5 page 0: n5md
         if key_number == 16:
             #print("You pressed button 5")
@@ -190,9 +190,9 @@ def key_do(key_number, page_n, token):
         elif key_number == 32768:
             #print("You pressed button 15")
             volume_down(token=token)
-    if page_n == 2:
+    if page_n == 2: #Possibly move the radio controls to this page
         print("see you later")
-    if page_n == 3:
+    if page_n == 3: #Controls for lights and automations around the house
         print("see you later")
         
     return
