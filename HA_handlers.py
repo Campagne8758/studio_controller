@@ -13,7 +13,7 @@ radio_stop = "http://192.168.0.23:8123/api/services/media_player/media_stop"
 
 #==========LIGHT FUNCTIONS ===================
 
-def scene_api(entity):
+def scene_api(entity, token):
     ha_url = scene_call
     headers = {
       "Authorization": token,
@@ -64,7 +64,7 @@ def key_do(key_number, page_n, token):
         #Key 5 page 0: cozy studio
         if key_number == 16:
             #print("You pressed button 5")
-            scene_api('{"entity_id":"scene.studio_cozy"}')
+            scene_api('{"entity_id":"scene.studio_cozy"}', token=token)
         #Key 6 page 0: Warm Bright
         elif key_number == 32:
             #print("You pressed button 6")
