@@ -22,6 +22,26 @@ def scene_api(entity, token):
     payload = entity
     response = urequests.post(ha_url, headers=headers, data=payload)
     response.close()
+    
+def light_off_api(entity, token):
+    ha_url = light_off_call
+    headers = {
+      "Authorization": token,
+      "content-type": 'application/json',
+      }
+    payload = entity
+    response = urequests.post(ha_url, headers=headers, data=payload)
+    response.close()
+    
+def light_toggle_api(entity, token):
+    ha_url = light_toggle_call
+    headers = {
+      "Authorization": token,
+      "content-type": 'application/json',
+      }
+    payload = entity
+    response = urequests.post(ha_url, headers=headers, data=payload)
+    response.close()
 
 #=============================================
 
@@ -68,80 +88,31 @@ def key_do(key_number, page_n, token):
         #Key 6 page 0: Warm Bright
         elif key_number == 32:
             #print("You pressed button 6")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_bright_warm"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_bright_warm"}', token=token)
         #Key 7 page 0: Cool Bright
         elif key_number == 64:
             #print("You pressed button 7")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_bright_cool"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_bright_cool"}', token=token)
         #Key 8 page 0: Studio OFF
         elif key_number == 128:
             #print("You pressed button 7bis")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_off"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_off"}', token=token)
         #Key 8 page 0: Desk Light Red
         elif key_number == 256:
             #print("You pressed button 8")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_desk_red"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_desk_red"}', token=token)
         #Key 9 page 0: Desk Light Warm White
         elif key_number == 512:
             #print("You pressed button 9")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_desk_warm_white"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_desk_warm_white"}', token=token)
         #Key 10 page 0: Desk Light Cool White
         elif key_number == 1024:
             #print("You pressed button 10")
-            ha_url = scene_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"scene.studio_desk_cool_white"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            scene_api('{"entity_id":"scene.studio_desk_cool_white"}', token=token)
         #Key 11 page 0: Desk Light OFF - TO DO
         elif key_number == 2048:
             #print("You pressed button 11")
-            ha_url = light_off_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"light.studio_desk_strip"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            light_off_api('{"entity_id":"light.studio_desk_strip"}', token=token)
         #Key 12 page 0: Toggle On Air light
         elif key_number == 4096:
             #print("You pressed button 12")            
@@ -156,14 +127,7 @@ def key_do(key_number, page_n, token):
         #Key 13 page 0:	TOGGLE Dome
         elif key_number == 8192:
             #print("You pressed button 13")
-            ha_url = light_toggle_call
-            headers = {
-              "Authorization": token,
-              "content-type": 'application/json',
-              }
-            payload = '{"entity_id":"light.dome_light"}'
-            response = urequests.post(ha_url, headers=headers, data=payload)
-            response.close()
+            light_toggle_api('{"entity_id":"light.dome_light"}', token=token)
         #Key 14 page 0: Volume UP - TO DO
         elif key_number == 16384:
             #print("You pressed button 14")
