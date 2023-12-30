@@ -1,4 +1,6 @@
 '''
+WHEN UPLOADING THIS FILE TO THE PICO RENAME TO main.py SO IT WILL BE EXECUTED AT STARTUP!!
+
 Pimoroni custom UF2 File for PICO W v 1.19
 https://github.com/pimoroni/pimoroni-pico/releases/tag/v1.19.10
 pimoroni-pico-v1.19.10-micropython.uf2
