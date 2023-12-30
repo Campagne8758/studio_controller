@@ -5,3 +5,5 @@ Python files to upload to a raspberry pico W to control Home Assistant via API c
 Please check the secrets template file and the top of the main file for additional recommendation and setup steps.
 
 More info coming soon once project completed!
+
+
