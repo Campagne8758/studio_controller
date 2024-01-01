@@ -56,7 +56,9 @@ current_page = 0
 #Startup functions
 #Function to conenc tot he WLAN
 def connect():
+    #add a 5 secs delay just to enjoy the light show a bit longer
     sleep(5)
+    #flag to terminate multi-threaded processes
     global flag
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
@@ -69,7 +71,7 @@ def connect():
     flag = False
     return
 
-#Start the spinning wheel evvect at the beginning - resets to "dim" white at the end
+#Start the spinning wheel effect at the beginning - resets to "dim" white at the end
 def light_show():
     global flag
     sequence = [0, 1, 2, 3, 7, 11, 15, 14, 13, 12, 8, 4]
@@ -133,7 +135,9 @@ connect()
 if flag == False:
     sleep(2)
     page(0)
-    
+
+#While loop to handle button presses during operation, passes button pressed, home assistant API token and
+    #the current page being displayed to the function on HA_andlers.py
 while True:
     button_states = keypad.get_button_states()
     if last_button_states != button_states:
