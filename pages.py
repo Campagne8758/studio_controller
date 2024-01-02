@@ -34,7 +34,7 @@ def draw_page_1():
     keypad.illuminate(10, 0, 0, 190)
     keypad.illuminate(11, 255, 80, 51)
     #Row 4
-    keypad.illuminate(12, 0, 0, 0)
+    keypad.illuminate(12, 200, 25, 25)
     keypad.illuminate(13, 255, 0, 0)
     keypad.illuminate(14, 200, 0, 0)
     keypad.illuminate(15, 0, 200, 0)

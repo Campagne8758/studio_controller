@@ -155,16 +155,19 @@ def key_do(key_number, page_n, token):
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://radio.6forty.com:8000/6forty.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 9 page 1: BBC 3
         elif key_number == 512:
-            print("You pressed button 9")
+            #print("You pressed button 9")
+            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_three&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
         #Key 10 page 1: BBC 4
         elif key_number == 1024:
-            print("You pressed button 10")
+            #print("You pressed button 10")
+            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_fourfm&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
         #Key 11 page 1: KEXP
         elif key_number == 2048:
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://kexp.streamguys1.com/kexp160.aac", "media_content_type": "audio/mp4"}', token=token)
-        #Key 12 page 1: TBC
+        #Key 12 page 1: BBC radio6 Music
         elif key_number == 4096:
-            print("You pressed button 12")            
+            print("You pressed button 12")
+            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_6music&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
         #Key 13 page 1: Stop Radio
         elif key_number == 8192:
             ha_url = radio_stop
