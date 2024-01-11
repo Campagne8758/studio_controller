@@ -1,2 +1,4 @@
 secrets.py
 .DS_Store
+.micropico
+.vscode

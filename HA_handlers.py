@@ -14,6 +14,7 @@ radio_stop = "http://192.168.0.23:8123/api/services/media_player/media_stop"
 #==========LIGHT FUNCTIONS ===================
 
 def scene_api(entity, token):
+    '''Takes scene entity name '{"entity_id":"scene.studio_cozy"}' and the token=token variable to recall an Home Assistant scene'''
     ha_url = scene_call
     headers = {
       "Authorization": token,
@@ -24,6 +25,7 @@ def scene_api(entity, token):
     response.close()
     
 def light_off_api(entity, token):
+    '''Takes light entity name '{"entity_id":"light.example"}' and the token=token variable to turn off a light'''
     ha_url = light_off_call
     headers = {
       "Authorization": token,
@@ -34,6 +36,7 @@ def light_off_api(entity, token):
     response.close()
     
 def light_toggle_api(entity, token):
+    '''Takes light entity name '{"entity_id":"scene.studio_cozy"}' and the token=token variable to toggle the state of a light (ON/OFF)'''
     ha_url = light_toggle_call
     headers = {
       "Authorization": token,
@@ -83,39 +86,30 @@ def key_do(key_number, page_n, token):
     if page_n == 0:
         #Key 5 page 0: cozy studio
         if key_number == 16:
-            #print("You pressed button 5")
             scene_api('{"entity_id":"scene.studio_cozy"}', token=token)
         #Key 6 page 0: Warm Bright
         elif key_number == 32:
-            #print("You pressed button 6")
             scene_api('{"entity_id":"scene.studio_bright_warm"}', token=token)
         #Key 7 page 0: Cool Bright
         elif key_number == 64:
-            #print("You pressed button 7")
             scene_api('{"entity_id":"scene.studio_bright_cool"}', token=token)
         #Key 8 page 0: Studio OFF
         elif key_number == 128:
-            #print("You pressed button 7bis")
             scene_api('{"entity_id":"scene.studio_off"}', token=token)
         #Key 8 page 0: Desk Light Red
         elif key_number == 256:
-            #print("You pressed button 8")
             scene_api('{"entity_id":"scene.studio_desk_red"}', token=token)
         #Key 9 page 0: Desk Light Warm White
         elif key_number == 512:
-            #print("You pressed button 9")
             scene_api('{"entity_id":"scene.studio_desk_warm_white"}', token=token)
         #Key 10 page 0: Desk Light Cool White
         elif key_number == 1024:
-            #print("You pressed button 10")
             scene_api('{"entity_id":"scene.studio_desk_cool_white"}', token=token)
         #Key 11 page 0: Desk Light OFF - TO DO
         elif key_number == 2048:
-            #print("You pressed button 11")
             light_off_api('{"entity_id":"light.studio_desk_strip"}', token=token)
         #Key 12 page 0: Toggle On Air light
-        elif key_number == 4096:
-            #print("You pressed button 12")            
+        elif key_number == 4096:         
             ha_url = switch_toggle_call
             headers = {
               "Authorization": token,
@@ -126,18 +120,62 @@ def key_do(key_number, page_n, token):
             response.close()
         #Key 13 page 0:	TOGGLE Dome
         elif key_number == 8192:
-            #print("You pressed button 13")
             light_toggle_api('{"entity_id":"light.dome_light"}', token=token)
         #Key 14 page 0: Volume UP - TO DO
         elif key_number == 16384:
-            #print("You pressed button 14")
             volume_up(token=token)
         #Key 15 page 0: Volume Down - TO DO
         elif key_number == 32768:
-            #print("You pressed button 15")
             volume_down(token=token)
             
+
+            
     if page_n == 1: #Additional lights control for the Studio
+        #Key 5 page 1: Shelves warm
+        if key_number == 16:
+            scene_api('{"entity_id":"scene.studio_shelves_warm"}', token=token)
+        #Key 6 page 1: Shelves Red
+        elif key_number == 32:
+            scene_api('{"entity_id":"scene.studio_shelves_red"}', token=token)
+            #Key 7 page 1: Shelves Cool 
+        elif key_number == 64:
+            scene_api('{"entity_id":"scene.studio_shelves_cool"}', token=token)
+        #Key 8 page 1: Shelves OFF 
+        elif key_number == 128:
+            light_off_api('{"entity_id":"light.studio_shelves"}', token=token)
+            #Key 8 page 1: Big light studio warm on
+        elif key_number == 256:
+            scene_api('{"entity_id":"scene.main_studio_warm"}', token=token)
+        #Key 9 page 1: Big Light studio warm dim
+        elif key_number == 512:
+            scene_api('{"entity_id":"scene.main_studio_warm_dim"}', token=token)
+        #Key 10 page 1: Big Light Studio Cool
+        elif key_number == 1024:
+            scene_api('{"entity_id":"scene.main_studio_cool"}', token=token)
+        #Key 11 page 1: Big Light studio off
+        elif key_number == 2048:
+            light_toggle_api('{"entity_id":"light.studio_main"}', token=token)
+        #Key 12 page 1: Studio all off
+        elif key_number == 4096:
+            scene_api('{"entity_id":"scene.studio_off"}', token=token)
+        #Key 13 page 1: Stop Radio
+        elif key_number == 8192:
+            ha_url = radio_stop
+            headers = {
+              "Authorization": token,
+              "content-type": 'application/json',
+              }
+            payload = '{"entity_id":"media_player.kitchen_speaker"}'
+            response = urequests.post(ha_url, headers=headers, data=payload)
+            response.close()
+        #Key 14 page 0: Volume UP - TO DO
+        elif key_number == 16384:
+            volume_up(token=token)
+        #Key 15 page 0: Volume Down - TO DO
+        elif key_number == 32768:
+            volume_down(token=token)
+           
+    if page_n == 2: #Radio controls
         #Key 5 page 0: n5md
         if key_number == 16:
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/n5md130.m3u", "media_content_type": "audio/mp4"}', token=token)
@@ -157,7 +195,7 @@ def key_do(key_number, page_n, token):
         elif key_number == 512:
             #print("You pressed button 9")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_three&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
-        #Key 10 page 1: BBC 4
+        #Key 10 page 1: BBC Radio 4
         elif key_number == 1024:
             #print("You pressed button 10")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_fourfm&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
@@ -184,8 +222,6 @@ def key_do(key_number, page_n, token):
         #Key 15 page 0: Volume Down - TO DO
         elif key_number == 32768:
             volume_down(token=token)
-    if page_n == 2: #Possibly move the radio controls to this page
-        print("see you later")
     if page_n == 3: #Controls for lights and automations around the house
         print("see you later")
         
