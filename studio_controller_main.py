@@ -29,7 +29,7 @@ import _thread
 import network
 from time import sleep
 from secrets import ssid, password, token
-from pages import draw_page_0, draw_page_1, draw_page_2
+from pages import draw_page_0, draw_page_1, draw_page_2, draw_page_3
 from HA_handlers import key_do
 
 
@@ -113,9 +113,7 @@ def draw_page(page_n):
     if page_n == 2:
         draw_page_2()
     if page_n == 3:
-        for i in range(4, 16):
-            keypad.illuminate(i, 0, 0, 255)
-            keypad.update()
+        draw_page_3()
 
 #================start=================
 

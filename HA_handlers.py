@@ -10,6 +10,12 @@ light_off_call = "http://192.168.0.23:8123/api/services/light/turn_off"
 #Radio URLs
 radio_start = "http://192.168.0.23:8123/api/services/media_player/play_media"
 radio_stop = "http://192.168.0.23:8123/api/services/media_player/media_stop"
+#Other URLs
+script_url = "http://192.168.0.23:8123/api/services/script/turn_on"
+
+def temp():
+    '''placeholder function to be removed after development is terminated'''
+    print("placeholder")
 
 #==========LIGHT FUNCTIONS ===================
 
@@ -81,6 +87,20 @@ def volume_down(token):
     response.close()
     
 #=============================================
+
+#============OTHER FUNCTIONS=================
+
+def start_script(data, token):
+    '''Start a script, data requires a string in the format: '{"entity_id":"script.cloudy_day_kitchen_automation_on"}' '''
+    ha_url = script_url
+    headers = {
+      "Authorization": token,
+      "content-type": 'application/json',
+      }
+    payload = data
+    response = urequests.post(ha_url, headers=headers, data=payload)
+    response.close()
+
 
 def key_do(key_number, page_n, token):
     if page_n == 0:
@@ -193,18 +213,15 @@ def key_do(key_number, page_n, token):
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://radio.6forty.com:8000/6forty.m3u", "media_content_type": "audio/mp4"}', token=token)
         #Key 9 page 1: BBC 3
         elif key_number == 512:
-            #print("You pressed button 9")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_three&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
         #Key 10 page 1: BBC Radio 4
         elif key_number == 1024:
-            #print("You pressed button 10")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_fourfm&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
         #Key 11 page 1: KEXP
         elif key_number == 2048:
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://kexp.streamguys1.com/kexp160.aac", "media_content_type": "audio/mp4"}', token=token)
         #Key 12 page 1: BBC radio6 Music
         elif key_number == 4096:
-            print("You pressed button 12")
             start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_6music&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
         #Key 13 page 1: Stop Radio
         elif key_number == 8192:
@@ -216,13 +233,56 @@ def key_do(key_number, page_n, token):
             payload = '{"entity_id":"media_player.kitchen_speaker"}'
             response = urequests.post(ha_url, headers=headers, data=payload)
             response.close()
-        #Key 14 page 0: Volume UP - TO DO
+        #Key 14 page 0: Volume UP
         elif key_number == 16384:
             volume_up(token=token)
-        #Key 15 page 0: Volume Down - TO DO
+        #Key 15 page 0: Volume Down
         elif key_number == 32768:
             volume_down(token=token)
-    if page_n == 3: #Controls for lights and automations around the house
-        print("see you later")
+            
+    if page_n == 3: # Additional controls for lights and automations around the house
+        #Key 5 page 0: Bedroom Bright
+        if key_number == 16:
+            scene_api('{"entity_id":"scene.bedroom_100"}', token=token)
+        #Key 6 page 1: Bedroom OFF
+        elif key_number == 32:
+            scene_api('{"entity_id":"scene.bedroom_off"}', token=token)
+        #Key 7 page 1: Lights ON scene
+        elif key_number == 64:
+            temp()
+        #Key 8 page 1: Living room OFF
+        elif key_number == 128:
+            temp()
+        #Key 8 page 1: TBC
+        elif key_number == 256:
+            temp()
+        #Key 9 page 1: TBC
+        elif key_number == 512:
+            temp()
+        #Key 10 page 1: Kitchen sunny
+        elif key_number == 1024:
+            start_script('{"entity_id":"script.sunny_day_kitchen_automation_on"}', token = token)
+        #Key 11 page 1: Kitchen cloudy
+        elif key_number == 2048:
+            start_script('{"entity_id":"script.cloudy_day_kitchen_automation_on"}', token = token)
+        #Key 12 page 1: Studio OFF
+        elif key_number == 4096:
+            scene_api('{"entity_id":"scene.studio_off"}', token=token)
+        #Key 13 page 1: Stop Radio
+        elif key_number == 8192:
+            ha_url = radio_stop
+            headers = {
+              "Authorization": token,
+              "content-type": 'application/json',
+              }
+            payload = '{"entity_id":"media_player.kitchen_speaker"}'
+            response = urequests.post(ha_url, headers=headers, data=payload)
+            response.close()
+        #Key 14 page 0: Volume UP
+        elif key_number == 16384:
+            volume_up(token=token)
+        #Key 15 page 0: Volume Down
+        elif key_number == 32768:
+            volume_down(token=token)
         
     return
