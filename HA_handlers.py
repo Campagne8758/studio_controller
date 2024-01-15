@@ -13,6 +13,9 @@ radio_stop = "http://192.168.0.23:8123/api/services/media_player/media_stop"
 #Other URLs
 script_url = "http://192.168.0.23:8123/api/services/script/turn_on"
 
+# media player global variable to make it easier to migrate to different speaker
+MEDIA_PLAYER = 'media_player.kitchen_speaker'
+
 def temp():
     '''placeholder function to be removed after development is terminated'''
     print("placeholder")
@@ -72,7 +75,7 @@ def volume_up(token):
       "Authorization": token,
       "content-type": 'application/json',
       }
-    payload = '{"entity_id":"media_player.kitchen_speaker"}'
+    payload = f'{{"entity_id":"{MEDIA_PLAYER}"}}'
     response = urequests.post(ha_url, headers=headers, data=payload)
     response.close()
 
@@ -82,7 +85,7 @@ def volume_down(token):
       "Authorization": token,
       "content-type": 'application/json',
       }
-    payload = '{"entity_id":"media_player.kitchen_speaker"}'
+    payload = f'{{"entity_id":"{MEDIA_PLAYER}"}}'
     response = urequests.post(ha_url, headers=headers, data=payload)
     response.close()
     
@@ -185,7 +188,7 @@ def key_do(key_number, page_n, token):
               "Authorization": token,
               "content-type": 'application/json',
               }
-            payload = '{"entity_id":"media_player.kitchen_speaker"}'
+            payload = f'{{"entity_id":"{MEDIA_PLAYER}"}}'
             response = urequests.post(ha_url, headers=headers, data=payload)
             response.close()
         #Key 14 page 0: Volume UP - TO DO
@@ -198,31 +201,31 @@ def key_do(key_number, page_n, token):
     if page_n == 2: #Radio controls
         #Key 5 page 0: n5md
         if key_number == 16:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/n5md130.m3u", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "https://somafm.com/m3u/n5md130.m3u", "media_content_type": "audio/mp4"}}', token=token)
         #Key 6 page 1: SanFran 
         elif key_number == 32:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/sf1033130.m3u", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "https://somafm.com/m3u/sf1033130.m3u", "media_content_type": "audio/mp4"}}', token=token)
         #Key 7 page 1: Drone
         elif key_number == 64:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/dronezone130.m3u", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "https://somafm.com/m3u/dronezone130.m3u", "media_content_type": "audio/mp4"}}', token=token)
         #Key 8 page 1: DarkZone 
         elif key_number == 128:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://somafm.com/m3u/darkzone130.m3u", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "https://somafm.com/m3u/darkzone130.m3u", "media_content_type": "audio/mp4"}}', token=token)
         #Key 8 page 1: 6forty
         elif key_number == 256:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://radio.6forty.com:8000/6forty.m3u", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "http://radio.6forty.com:8000/6forty.m3u", "media_content_type": "audio/mp4"}}', token=token)
         #Key 9 page 1: BBC 3
         elif key_number == 512:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_three&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_three&bitrate=320000", "media_content_type": "audio/mp4"}}', token=token)
         #Key 10 page 1: BBC Radio 4
         elif key_number == 1024:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_fourfm&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_radio_fourfm&bitrate=320000", "media_content_type": "audio/mp4"}}', token=token)
         #Key 11 page 1: KEXP
         elif key_number == 2048:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "https://kexp.streamguys1.com/kexp160.aac", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "https://kexp.streamguys1.com/kexp160.aac", "media_content_type": "audio/mp4"}}', token=token)
         #Key 12 page 1: BBC radio6 Music
         elif key_number == 4096:
-            start_radio('{"entity_id":"media_player.kitchen_speaker", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_6music&bitrate=320000", "media_content_type": "audio/mp4"}', token=token)
+            start_radio(f'{{"entity_id":"{MEDIA_PLAYER}", "media_content_id": "http://lstn.lv/bbc.m3u8?station=bbc_6music&bitrate=320000", "media_content_type": "audio/mp4"}}', token=token)
         #Key 13 page 1: Stop Radio
         elif key_number == 8192:
             ha_url = radio_stop
@@ -230,7 +233,7 @@ def key_do(key_number, page_n, token):
               "Authorization": token,
               "content-type": 'application/json',
               }
-            payload = '{"entity_id":"media_player.kitchen_speaker"}'
+            payload = f'{{"entity_id":"{MEDIA_PLAYER}"}}'
             response = urequests.post(ha_url, headers=headers, data=payload)
             response.close()
         #Key 14 page 0: Volume UP
@@ -275,7 +278,7 @@ def key_do(key_number, page_n, token):
               "Authorization": token,
               "content-type": 'application/json',
               }
-            payload = '{"entity_id":"media_player.kitchen_speaker"}'
+            payload = f'{{"entity_id":"{MEDIA_PLAYER}"}}'
             response = urequests.post(ha_url, headers=headers, data=payload)
             response.close()
         #Key 14 page 0: Volume UP
