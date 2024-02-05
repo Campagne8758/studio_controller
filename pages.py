@@ -71,8 +71,8 @@ def draw_page_3():
     #Row 3
     keypad.illuminate(8, 0, 0, 0)
     keypad.illuminate(9, 0, 0, 0)
-    keypad.illuminate(10, 200, 50, 0)
-    keypad.illuminate(11, 0, 50, 200)
+    keypad.illuminate(10, 0, 0, 0)
+    keypad.illuminate(11, 200, 50, 0)
     #Row 4
     keypad.illuminate(12, 200, 25, 25)
     keypad.illuminate(13, 255, 0, 0)

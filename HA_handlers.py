@@ -252,22 +252,22 @@ def key_do(key_number, page_n, token):
             scene_api('{"entity_id":"scene.bedroom_off"}', token=token)
         #Key 7 page 1: Lights ON scene
         elif key_number == 64:
-            temp()
+            scene_api('{"entity_id":"scene.lights_on"}', token=token)
         #Key 8 page 1: Living room OFF
         elif key_number == 128:
-            temp()
+            light_off_api('{"entity_id":"light.living_room_group"}', token=token)
         #Key 8 page 1: TBC
         elif key_number == 256:
             temp()
         #Key 9 page 1: TBC
         elif key_number == 512:
             temp()
-        #Key 10 page 1: Kitchen sunny
+        #Key 10 page 1: TBC
         elif key_number == 1024:
-            start_script('{"entity_id":"script.sunny_day_kitchen_automation_on"}', token = token)
-        #Key 11 page 1: Kitchen cloudy
+            temp()
+        #Key 11 page 1: Kitchen movement automation toggle between cloudy and sunny day
         elif key_number == 2048:
-            start_script('{"entity_id":"script.cloudy_day_kitchen_automation_on"}', token = token)
+            start_script('{"entity_id":"script.kitchen_automation_toggle"}', token = token)
         #Key 12 page 1: Studio OFF
         elif key_number == 4096:
             scene_api('{"entity_id":"scene.studio_off"}', token=token)
